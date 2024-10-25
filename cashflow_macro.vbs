@@ -78,4 +78,12 @@ Sub Reporte_Socios_Mes()
     wsSocios.Cells(1, 2).HorizontalAlignment = xlCenter
     wsSocios.Cells(1, 2).VerticalAlignment = xlCenter
     wsSocios.Cells(1, 2).Font.Bold = True
+
+    ' Copiar el contenido del mes seleccionado de la hoja "FLUJO" a "SOCIOS"
+    For i = 3 To lastRow
+        For j = colMesInicio To colMesFin
+            wsSocios.Cells(i, j - colMesInicio + 2).Value = wsFlujo.Cells(i, j).Value
+            wsSocios.Cells(i, j - colMesInicio + 2).Interior.Color = wsFlujo.Cells(i, j).Interior.Color
+        Next j
+    Next i
 End Sub
