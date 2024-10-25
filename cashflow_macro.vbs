@@ -64,4 +64,11 @@ Sub Reporte_Socios_Mes()
         wsSocios.Cells(i, 1).Value = wsFlujo.Cells(i, 1).Value
         wsSocios.Cells(i, 1).Interior.Color = wsFlujo.Cells(i, 1).Interior.Color
     Next i
+
+    ' Copiar los encabezados del mes y semanas específicas a "SOCIOS"
+    For j = colMesInicio To colMesFin
+        wsSocios.Cells(2, j - colMesInicio + 2).Value = wsFlujo.Cells(headerRow + 1, j).Value
+        wsSocios.Cells(2, j - colMesInicio + 2).Font.Bold = True
+        wsSocios.Cells(2, j - colMesInicio + 2).Interior.Color = wsFlujo.Cells(headerRow + 1, j).Interior.Color
+    Next j
 End Sub
