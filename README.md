@@ -1,4 +1,4 @@
-# 📊 Monthly Partner Report Generator
+# 📊 AUTOMATED MONTHLY FINANCIAL SUMMARY MACRO
 
 ## Description
 The **Monthly Partner Report Generator** is an Excel macro that automates the creation of a "SOCIOS" sheet based on the existing "FLUJO" sheet. The macro allows you to select a specific month and generate a weekly breakdown of financial data while maintaining the original format of the "FLUJO" sheet. The main motivation for this project is to facilitate quick and accurate financial data analysis, reducing manual errors and saving time in report generation.
