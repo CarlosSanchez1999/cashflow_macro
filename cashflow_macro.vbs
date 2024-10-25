@@ -12,4 +12,23 @@ Sub Reporte_Socios_Mes()
 
     ' Solicitar al usuario que ingrese el mes deseado
     mesSeleccionado = InputBox("Ingrese el nombre del mes (por ejemplo, 'ENERO', 'FEBRERO'):", "Seleccionar Mes")
+
+    ' Verificar si el usuario ingresó un mes
+    If mesSeleccionado = "" Then
+        MsgBox "Debe ingresar un mes para continuar.", vbExclamation
+        Exit Sub
+    End If
+
+    ' Crear el nombre de la nueva hoja basado en el mes
+    nombreHoja = "SOCIOS_" & UCase(mesSeleccionado)
+
+    ' Verificar si ya existe una hoja con ese nombre y eliminarla si existe
+    On Error Resume Next
+    Set wsSocios = ThisWorkbook.Sheets(nombreHoja)
+    If Not wsSocios Is Nothing Then
+        Application.DisplayAlerts = False
+        wsSocios.Delete
+        Application.DisplayAlerts = True
+    End If
+    On Error GoTo 0
 End Sub
