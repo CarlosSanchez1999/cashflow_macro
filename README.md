@@ -12,7 +12,7 @@ The primary technology used is **VBA (Visual Basic for Applications)**, as it al
 - [License](#license)
 
 ## Installation Instructions
-1. Download the Excel file that contains the macro.
+1. Download the Excel Anonymized_FLUJO_v1.
 2. Open the file in **Microsoft Excel**.
 3. Enable editing and macro execution to allow the macro to run properly:
    - Go to **File > Options > Trust Center > Trust Center Settings > Macro Settings**.
