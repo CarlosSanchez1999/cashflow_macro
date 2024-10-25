@@ -58,4 +58,10 @@ Sub Reporte_Socios_Mes()
 
     ' Eliminar todos los bordes en la hoja "SOCIOS"
     wsSocios.Cells.Borders.LineStyle = xlNone
+
+    ' Copiar la columna A (descripciones) a la hoja "SOCIOS"
+    For i = 1 To lastRow
+        wsSocios.Cells(i, 1).Value = wsFlujo.Cells(i, 1).Value
+        wsSocios.Cells(i, 1).Interior.Color = wsFlujo.Cells(i, 1).Interior.Color
+    Next i
 End Sub
