@@ -49,4 +49,13 @@ Sub Reporte_Socios_Mes()
         MsgBox "No se encontró el mes especificado en la hoja 'FLUJO'.", vbExclamation
         Exit Sub
     End If
+
+    ' Determinar el rango fusionado del mes seleccionado
+    colMesFin = wsFlujo.Cells(headerRow, colMesInicio).MergeArea.Columns.Count + colMesInicio - 1
+
+    ' Obtener el último rango usado en la hoja "FLUJO"
+    lastRow = wsFlujo.Cells(Rows.Count, 1).End(xlUp).Row
+
+    ' Eliminar todos los bordes en la hoja "SOCIOS"
+    wsSocios.Cells.Borders.LineStyle = xlNone
 End Sub
