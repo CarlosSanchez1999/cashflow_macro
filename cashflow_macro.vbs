@@ -31,4 +31,8 @@ Sub Reporte_Socios_Mes()
         Application.DisplayAlerts = True
     End If
     On Error GoTo 0
+
+    ' Crear una nueva hoja "SOCIOS" para el mes seleccionado
+    Set wsSocios = ThisWorkbook.Sheets.Add(After:=wsFlujo)
+    wsSocios.Name = nombreHoja
 End Sub
