@@ -86,4 +86,62 @@ Sub Reporte_Socios_Mes()
             wsSocios.Cells(i, j - colMesInicio + 2).Interior.Color = wsFlujo.Cells(i, j).Interior.Color
         Next j
     Next i
+
+    ' Aplicar negritas y subrayado a filas específicas con nombres exactos
+    For i = 3 To lastRow
+        If wsSocios.Cells(i, 1).Value = "Saldo inicial bancos" Or _
+           wsSocios.Cells(i, 1).Value = "TOTAL INGRESOS" Or _
+           wsSocios.Cells(i, 1).Value = "TOTAL EGRESOS" Or _
+           wsSocios.Cells(i, 1).Value = "SALDO BANCOS" Then
+            wsSocios.Rows(i).Font.Bold = True
+            If wsSocios.Cells(i, 1).Value = "TOTAL INGRESOS" Or _
+               wsSocios.Cells(i, 1).Value = "TOTAL EGRESOS" Or _
+               wsSocios.Cells(i, 1).Value = "SALDO BANCOS" Then
+                wsSocios.Rows(i).Font.Underline = xlUnderlineStyleSingle
+            End If
+        End If
+    Next i
+
+    ' Combinar y centrar la fila "INGRESOS", con fondo verde
+    For i = 3 To lastRow
+        If wsSocios.Cells(i, 1).Value = "INGRESOS" Then
+            wsSocios.Range(wsSocios.Cells(i, 1), wsSocios.Cells(i, colMesFin - colMesInicio + 2)).Merge
+            wsSocios.Cells(i, 1).HorizontalAlignment = xlCenter
+            wsSocios.Cells(i, 1).VerticalAlignment = xlCenter
+            wsSocios.Cells(i, 1).Interior.Color = RGB(198, 239, 206) ' Verde claro
+        End If
+    Next i
+
+    ' Combinar y centrar la fila "EGRESOS", con fondo rojo
+    For i = 3 To lastRow
+        If wsSocios.Cells(i, 1).Value = "EGRESOS" Then
+            wsSocios.Range(wsSocios.Cells(i, 1), wsSocios.Cells(i, colMesFin - colMesInicio + 2)).Merge
+            wsSocios.Cells(i, 1).HorizontalAlignment = xlCenter
+            wsSocios.Cells(i, 1).VerticalAlignment = xlCenter
+            wsSocios.Cells(i, 1).Interior.Color = RGB(255, 199, 206) ' Rojo claro
+        End If
+    Next i
+
+    ' Filtrar y eliminar filas sin valores numéricos
+    For i = lastRow To 3 Step -1
+        If Application.WorksheetFunction.Count(wsSocios.Range(wsSocios.Cells(i, 2), wsSocios.Cells(i, colMesFin - colMesInicio + 2))) = 0 _
+           And wsSocios.Cells(i, 1).Value <> "INGRESOS" And wsSocios.Cells(i, 1).Value <> "EGRESOS" Then
+            wsSocios.Rows(i).Delete
+        End If
+    Next i
+
+    ' Agregar bordes solo a la derecha de la columna A
+    For i = 1 To lastRow
+        With wsSocios.Cells(i, 1).Borders(xlEdgeRight)
+            .LineStyle = xlContinuous
+            .Weight = xlThin
+        End With
+    Next i
+
+    ' Ajustar columnas y filas
+    wsSocios.Columns.AutoFit
+    wsSocios.Rows.AutoFit
+
+    ' Mensaje de finalización
+    MsgBox "La hoja '" & nombreHoja & "' ha sido creada.", vbInformation
 End Sub
