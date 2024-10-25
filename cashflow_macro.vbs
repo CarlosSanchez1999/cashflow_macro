@@ -71,4 +71,11 @@ Sub Reporte_Socios_Mes()
         wsSocios.Cells(2, j - colMesInicio + 2).Font.Bold = True
         wsSocios.Cells(2, j - colMesInicio + 2).Interior.Color = wsFlujo.Cells(headerRow + 1, j).Interior.Color
     Next j
+
+    ' Combinar celdas para el nombre del mes en B1, abarcando todas las columnas del mes
+    wsSocios.Range(wsSocios.Cells(1, 2), wsSocios.Cells(1, colMesFin - colMesInicio + 2)).Merge
+    wsSocios.Cells(1, 2).Value = mesSeleccionado
+    wsSocios.Cells(1, 2).HorizontalAlignment = xlCenter
+    wsSocios.Cells(1, 2).VerticalAlignment = xlCenter
+    wsSocios.Cells(1, 2).Font.Bold = True
 End Sub
