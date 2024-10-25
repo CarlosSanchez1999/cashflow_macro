@@ -35,4 +35,18 @@ Sub Reporte_Socios_Mes()
     ' Crear una nueva hoja "SOCIOS" para el mes seleccionado
     Set wsSocios = ThisWorkbook.Sheets.Add(After:=wsFlujo)
     wsSocios.Name = nombreHoja
+
+    ' Encontrar la primera columna del mes seleccionado
+    headerRow = 1 ' Supone que la fila 1 tiene los nombres de los meses
+    For colMesInicio = 1 To wsFlujo.Cells(headerRow, Columns.Count).End(xlToLeft).Column
+        If UCase(wsFlujo.Cells(headerRow, colMesInicio).Value) = UCase(mesSeleccionado) Then
+            Exit For
+        End If
+    Next colMesInicio
+
+    ' Verificar si se encontró el mes en la hoja "FLUJO"
+    If colMesInicio > wsFlujo.Cells(headerRow, Columns.Count).End(xlToLeft).Column Then
+        MsgBox "No se encontró el mes especificado en la hoja 'FLUJO'.", vbExclamation
+        Exit Sub
+    End If
 End Sub
